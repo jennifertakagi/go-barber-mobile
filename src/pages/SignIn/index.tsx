@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigation } from '@react-navigation/native';
 import {
   Image,
   KeyboardAvoidingView,
@@ -23,6 +24,8 @@ import {
 import logoImage from '../../assets/logo.png';
 
 const SignIn: React.FC = () => {
+  const navigation = useNavigation();
+
   return (
     <>
       <KeyboardAvoidingView
@@ -37,13 +40,13 @@ const SignIn: React.FC = () => {
           <Container>
             <Image source={logoImage} />
             <View>
-              <Title>Enter</Title>
+              <Title>Login</Title>
             </View>
 
             <Input name="email" icon="mail" placeholder="Email" />
             <Input name="password" icon="lock" placeholder="Password" />
 
-            <Button onPress={() => console.log('clicked')}>Login</Button>
+            <Button onPress={() => console.log('clicked')}>Enter</Button>
 
             <ForgotPassword onPress={() => console.log('clicked')}>
               <ForgotPasswordText>I forgot my password</ForgotPasswordText>
@@ -52,7 +55,7 @@ const SignIn: React.FC = () => {
         </ScrollView>
       </KeyboardAvoidingView>
 
-      <CreateAccountButton onPress={() => console.log('clicked')}>
+      <CreateAccountButton onPress={() => navigation.navigate('SignUp')}>
         <Icon name="log-in" size={20} color="#ff9000" />
         <CreateAccountButtonText>Create a new account</CreateAccountButtonText>
       </CreateAccountButton>
