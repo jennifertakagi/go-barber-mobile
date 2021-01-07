@@ -14,6 +14,7 @@ import * as Yup from 'yup';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 
+import { useAuth } from '../../hooks/auth';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -39,38 +40,43 @@ const SignIn: React.FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const navigation = useNavigation();
 
-  const handleSignIn = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const { signIn } = useAuth();
 
-      const schema = Yup.object().shape({
-        email: Yup.string()
-          .required('Name is required')
-          .email('Enter a valid email'),
-        password: Yup.string().required('Password is required'),
-      });
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      await schema.validate(data, { abortEarly: false });
+        const schema = Yup.object().shape({
+          email: Yup.string()
+            .required('Name is required')
+            .email('Enter a valid email'),
+          password: Yup.string().required('Password is required'),
+        });
 
-      // await signIn({
-      //   email: data.email,
-      //   password: data.password,
-      // });
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(error);
+        await schema.validate(data, { abortEarly: false });
 
-        formRef.current?.setErrors(errors);
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
 
-        return;
+          formRef.current?.setErrors(errors);
+
+          return;
+        }
+
+        Alert.alert(
+          'Error on authentication',
+          'An error occurred on login, check your credentials.',
+        );
       }
-
-      Alert.alert(
-        'Error on authentication',
-        'An error occurred on login, check your credentials.',
-      );
-    }
-  }, []);
+    },
+    [signIn],
+  );
 
   return (
     <>

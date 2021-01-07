@@ -42,43 +42,46 @@ const SignUp: React.FC = () => {
   const emailInputRef = useRef<TextInput>(null);
   const passwordInputRef = useRef<TextInput>(null);
 
-  const handleSignUp = useCallback(async (data: SignUpFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSignUp = useCallback(
+    async (data: SignUpFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        name: Yup.string().required('Name is required'),
-        email: Yup.string()
-          .required('Name is required')
-          .email('Enter a valid email'),
-        password: Yup.string().min(
-          6,
-          'The length must have min 6 length characters',
-        ),
-      });
+        const schema = Yup.object().shape({
+          name: Yup.string().required('Name is required'),
+          email: Yup.string()
+            .required('Name is required')
+            .email('Enter a valid email'),
+          password: Yup.string().min(
+            6,
+            'The length must have min 6 length characters',
+          ),
+        });
 
-      await schema.validate(data, { abortEarly: false });
+        await schema.validate(data, { abortEarly: false });
 
-      await api.post('/users', data);
+        await api.post('/users', data);
 
-      Alert.alert('Register successfully!');
+        Alert.alert('Register successfully!');
 
-      navigation.navigate('SignIn');
-    } catch (error) {
-      if (error instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(error);
+        navigation.navigate('SignIn');
+      } catch (error) {
+        if (error instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(error);
 
-        formRef.current?.setErrors(errors);
+          formRef.current?.setErrors(errors);
 
-        return;
+          return;
+        }
+
+        Alert.alert(
+          'Error on register!',
+          'An error occurred on register, try again.',
+        );
       }
-
-      Alert.alert(
-        'Error on register!',
-        'An error occurred on register, try again.',
-      );
-    }
-  }, []);
+    },
+    [navigation],
+  );
 
   return (
     <>
