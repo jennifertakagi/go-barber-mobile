@@ -29,15 +29,16 @@
       "prettier"
     ],
     "rules": {
-      "import/prefer-default-export": "off",
-      "no-unused-expressions": "off",
-      "no-use-before-define": "off",
       "prettier/prettier": "error",
-      "no-return-assign": "off",
-      "react/jsx-props-no-spreading": "off",
+      "no-use-before-define": "off",
+      "no-unused-expressions": "off",
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
+      "react/prop-types": "off",
+      "react/jsx-props-no-spreading": "off",
       "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+      "@typescript-eslint/ban-types": "off",
+      "import/prefer-default-export": "off",
       "import/extensions": [
         "error",
         "ignorePackages",
