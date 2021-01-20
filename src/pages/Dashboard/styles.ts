@@ -1,5 +1,7 @@
 import styled from 'styled-components/native';
 import { getStatusBarHeight } from 'react-native-iphone-x-helper';
+import { FlatList } from 'react-native';
+import { Provider } from './index';
 
 export const Container = styled.View`
   flex: 1;
@@ -23,7 +25,7 @@ export const HeaderTitle = styled.Text`
 `;
 
 export const UserName = styled.Text`
-  color: '#ff9000';
+  color: #ff9000;
   font-family: 'RobotoSlab-Medium';
 `;
 
@@ -34,3 +36,5 @@ export const UserAvatar = styled.Image`
   height: 56px;
   border-radius: 28px;
 `;
+
+export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)``;
