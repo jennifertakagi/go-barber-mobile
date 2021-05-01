@@ -63,8 +63,6 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](#)
-
 Manage you Barbershop with this web application.
 
 Features:
@@ -195,5 +193,3 @@ Jennifer Takagi - [@jennitakagi](https://twitter.com/jennitakagi)
 [license-url]: https://github.com/jennifertakagi/go-barber-mobile/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/jennifertakagi
-[product-screenshot]: docs/go-barber-mobile.png
-
